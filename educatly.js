@@ -19,13 +19,7 @@ function getConnection(){
     return pool;
 }
 
-router.get("/get", (req, res) => {
-    pool.query("SELECT * FROM `task` ",
-   (err, rows, fields) => {
-        res.status(200)
-       res.send(rows)
-    })
-})
+
 // create login router 
 
 
