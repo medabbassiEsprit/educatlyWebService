@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var taskRouter = require('./Task');
+var educatlyRouter = require('./educatly');
 
 var app = express();
 
@@ -21,8 +22,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/task', taskRouter);
+
+
+app.use('/educatly',educatlyRouter)
 
 
 
@@ -49,7 +51,7 @@ app.use(function(req, res, next){
 		host     : 'localhost',
 		user     : 'root',
 		password : '',
-		database : 'esprit'
+		database : 'educatly'
 	});
 	res.locals.connect();
 	
