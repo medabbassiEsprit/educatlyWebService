@@ -28,8 +28,8 @@ router.get("/Login/:login/:password", (req, res) => {
    (err, rows, fields) => {
         if (rows >=1 ) {
             res.status(200)
-            res.json({message:"succes"})
-            res.send(rows)  
+            res.json(rows)
+           
         } else{
             res.json({message:"failure",body:"wrong password or username"})
         }
@@ -52,8 +52,8 @@ router.post("/register/:nom/:prenom/:username/:email/:password/:role", (req, res
    (err, rows, fields) => {
         if (rows >=1 ) {
             res.status(200)
-            res.json({message:"succes"})
-            res.send(rows)  
+            res.json(rows)
+      
         } else{
             res.json({message:"failure",body:"missing arguments"})
         }
@@ -73,8 +73,8 @@ router.post("/addCours/:titre/:contenu/:type_cours/:id_createur/:id_categories",
    (err, rows, fields) => {
         if (rows >=1 ) {
             res.status(200)
-            res.json({message:"succes"})
-            res.send(rows)  
+            res.json(rows)
+     
         } else{
             res.json({message:"failure",body:"missing arguments"})
         }

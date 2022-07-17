@@ -26,7 +26,8 @@ router.post("/create/:status/:name",(req,res)=>{
 pool.query("INSERT INTO `task`(`status`,`name`) VALUES (?,?)",
 [
     req.params.status,
-    req.params.name],
+    req.params.name]
+    ,
     (err,user_rows,fields)=>{
 
 res.status(200);
