@@ -26,37 +26,33 @@ router.get("/Login/:login/:password", (req, res) => {
             req.params.password
     ],
    (err, rows, fields) => {
-        if (rows >=1 ) {
+       
             res.status(200)
             res.json(rows)
            
-        } else{
-            res.json({message:"failure",body:"wrong password or username"})
-        }
+       
       
     })
 })
 
 
 // create register router 
-router.post("/register/:nom/:prenom/:username/:email/:password/:role", (req, res) => {
-    pool.query("INSERT INTO `users`( `nom`, `prenom`, `username`, `email`, `password`, `role`) VALUES (?,?,?,?,?,?) ",[
+router.post("/register/:nom/:prenom/:username/:email/:password", (req, res) => {
+    pool.query("INSERT INTO `users`( `nom`, `prenom`, `username`, `email`, `password`) VALUES (?,?,?,?,?) ",[
             req.params.nom,
             req.params.prenom,
             req.params.username,
             req.params.email,
             req.params.password,
-            req.params.role,
+          
 
     ],
    (err, rows, fields) => {
-        if (rows >=1 ) {
+       
             res.status(200)
             res.json(rows)
       
-        } else{
-            res.json({message:"failure",body:"missing arguments"})
-        }
+       
       
     })
 })
@@ -110,7 +106,7 @@ router.get("/getCoursesCategorie/:id/", (req, res) => {
    (err, rows, fields) => {
         if (rows >=1 ) {
             res.status(200)
-            res.json({message:"succes",rows})
+            res.json(rows)
             
         } else{
             res.json({message:"failure",body:"wrong parametres"})
@@ -129,20 +125,19 @@ router.post("/addExerice/:titreExercice/:contenu/:solution/:solutionDeux", (req,
 
     ],
    (err, rows, fields) => {
-        if (rows >=1 ) {
+     
             res.status(200)
-            res.json({message:"succes"})
-            res.send(rows)  
-        } else{
-            res.json({message:"failure",body:"missing arguments"})
-        }
+            res.json(rows)
+
+       
       
     })
 })
 
  // create ajouter commentaire
  router.post("/addCmnt/:contenu/:id_exercice/:id_user", (req, res) => {
-    pool.query("INSERT INTO `commentaire`(`contenu`, `id_exercice`, `id_user`) VALUES (?,?,?) ",[
+    console.log(req.params)
+    pool.query("INSERT INTO `commentaire` (`contenu`, `id_exercice`, `id_user`) VALUES (?,?,?) ",[
         
             req.params.contenu,
             req.params.id_exercice,
@@ -151,15 +146,31 @@ router.post("/addExerice/:titreExercice/:contenu/:solution/:solutionDeux", (req,
 
     ],
    (err, rows, fields) => {
-        if (rows >= 1 ) {
+    console.log(rows)
+
             res.status(200)
-            res.json({message:"succes"})
-            res.send(rows)  
-        } else{
-            res.json({message:"failure",body:"missing arguments"})
-        }
-      
+            res.send(rows)
+            
+        
     })
+})
+
+router.get("/getAllExercice",(req,res)=> {
+    pool.query("SELECT * FROM `exercice` WHERE 1 ",[
+        
+        req.params.contenu,
+        req.params.id_exercice,
+        req.params.id_user,
+       
+
+],
+(err, rows, fields) => {
+ 
+        res.status(200)
+        res.json(rows)
+        
+    
+})
 })
  
 
