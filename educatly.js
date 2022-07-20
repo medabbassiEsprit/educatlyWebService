@@ -34,13 +34,27 @@ router.get("/Login/:login/:password", (req, res) => {
       
     })
 })
+router.post("/update/:login/:password", (req, res) => {
+    pool.query("SELECT * FROM `users` where username = ? and password =? ",[
+            req.params.login,
+            req.params.password
+    ],
+   (err, rows, fields) => {
+       
+            res.status(200)
+            res.json(rows)
+           
+       
+      
+    })
+})
+
 
 
 // create register router 
-router.post("/register/:nom/:prenom/:username/:email/:password", (req, res) => {
-    pool.query("INSERT INTO `users`( `nom`, `prenom`, `username`, `email`, `password`) VALUES (?,?,?,?,?) ",[
-            req.params.nom,
-            req.params.prenom,
+router.post("/register/:username/:email/:password", (req, res) => {
+    pool.query("INSERT INTO `users`( `username`, `email`, `password`) VALUES (?,?,?) ",[
+       
             req.params.username,
             req.params.email,
             req.params.password,
